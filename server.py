@@ -15,9 +15,12 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
+#load openai api key from .env file
+from dotenv import load_dotenv
+load_dotenv()
+OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 
-
-llm=ChatOpenAI(model="gpt-4o",temperature=0)
+llm=ChatOpenAI(model="gpt-4-turbo",temperature=0,api_key=OPENAI_API_KEY)
 def process_pdf(file_path):
     loader = PyPDFLoader(file_path)
     documents = loader.load()
@@ -101,7 +104,7 @@ async def analyze_companies(
         raise HTTPException(status_code=400, detail="Exactly 4 PDF files are required")
 
     company_data = {}
-    company_names = ["Company A (Dabur)", "Company B", "Company C", "Company D"]
+    company_names = ["Company A ", "Company B", "Company C", "Company D"]
 
     # Process PDF files
     for file, company_name in zip(files, company_names):
