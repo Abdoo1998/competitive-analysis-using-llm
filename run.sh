@@ -14,7 +14,7 @@ sleep 5
 
 # Start the Streamlit frontend on port 5000
 echo "Starting the Streamlit frontend..."
-nohup streamlit run app.py > frontend.log 2>&1 &
+nohup streamlit run app.py --server.port 8080 > frontend.log 2>&1 &  
 FRONTEND_PID=$!
 echo "Streamlit frontend started with PID $FRONTEND_PID"
 
@@ -28,7 +28,7 @@ echo "You can view the frontend logs in frontend.log"
 echo "To stop the processes, run: ./stop.sh"
 
 # Display the Streamlit access link
-echo "Access the Streamlit frontend at: http://localhost:8501"
+echo "Access the Streamlit frontend at: http://localhost:8080"
 
 # Create a stop script
 cat << EOF > stop.sh
