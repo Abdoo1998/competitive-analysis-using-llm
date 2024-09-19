@@ -112,11 +112,9 @@ def get_response(user_input: str, agent_type: str) -> str:
 # AutoGen agent configurations
 config_list = [
     {
-        "model": "gpt-4",
-        "api_base": "https://genai-swd.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview",
-        "api_type": "azure",
-        "api_version": "2023-03-15-preview",
-        "api_key": os.environ["AZURE_OPENAI_API_KEY"],
+        "model": "gpt-4o",
+        "api_key": OPENAI_API_KEY,
+        
     }
 ]
 
