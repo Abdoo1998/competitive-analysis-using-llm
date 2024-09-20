@@ -42,11 +42,13 @@ define user input is blocked
     contains "illegal activities"
     contains abusive language
     contains harsh language
+    contains "jailbreak"
 
 define bot response is blocked
     contains "encourage illegal activities"
     contains abusive language
     contains harsh language
+    contains "jailbreak"
     
 """
 
@@ -64,11 +66,13 @@ define user input is blocked
     contains "money laundering"
     contains abusive language
     contains harsh language
+    contains "jailbreak"
 
 define bot response is blocked
     contains "tax evasion strategies"
     contains abusive language
     contains harsh language
+    contains "jailbreak"
 """
 
 GENERAL_CONFIG = """
@@ -84,11 +88,14 @@ define user input is blocked
     contains "illegal activities"
     contains abusive language
     contains harsh language
+    contains "jailbreak"
+    
 
 define bot response is blocked
     contains "instructions for illegal activities"
     contains abusive language
     contains harsh language
+    contains "jailbreak"
 """
 
 @st.cache_resource
