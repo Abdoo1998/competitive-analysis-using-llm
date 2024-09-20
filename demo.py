@@ -23,7 +23,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # Initialize Azure OpenAI
 @st.cache_resource
 def get_llm():
-    return ChatOpenAI(model="gpt-4-turbo",temperature=0,api_key=OPENAI_API_KEY)
+    return ChatOpenAI(model="gpt-4o",temperature=0,api_key=OPENAI_API_KEY)
 
 llm = get_llm()
 
