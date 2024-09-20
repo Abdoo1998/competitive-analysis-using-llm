@@ -18,6 +18,7 @@ nest_asyncio.apply()
 from dotenv import load_dotenv
 load_dotenv()
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Initialize Azure OpenAI
 @st.cache_resource
@@ -39,9 +40,14 @@ define bot refuse illegal request
 
 define user input is blocked
     contains "illegal activities"
+    contains abusive language
+    contains harsh language
 
 define bot response is blocked
     contains "encourage illegal activities"
+    contains abusive language
+    contains harsh language
+    
 """
 
 FINANCIAL_CONFIG = """
@@ -56,9 +62,13 @@ define bot refuse illegal request
 define user input is blocked
     contains "illegal financial activities"
     contains "money laundering"
+    contains abusive language
+    contains harsh language
 
 define bot response is blocked
     contains "tax evasion strategies"
+    contains abusive language
+    contains harsh language
 """
 
 GENERAL_CONFIG = """
@@ -72,9 +82,13 @@ define bot refuse illegal request
 
 define user input is blocked
     contains "illegal activities"
+    contains abusive language
+    contains harsh language
 
 define bot response is blocked
     contains "instructions for illegal activities"
+    contains abusive language
+    contains harsh language
 """
 
 @st.cache_resource
@@ -239,7 +253,7 @@ Based on these descriptions and the query, determine which agent would be best s
 
 Respond with either 'legal', 'financial', or 'general', followed by a brief explanation of your reasoning."""
         
-        response = llm([{"role": "user", "content": prompt}])
+        response = llm.invoke([{"role": "user", "content": prompt}])
         classification = response.content.strip().lower().split()[0]
         return classification
 
@@ -250,7 +264,7 @@ general_knowledge_agent = GeneralKnowledgeAgent()
 orchestrator = Orchestrator()
 
 # Streamlit app
-st.title("🤖 AutoGen Multi-Agent AI Assistant with Guardrails")
+st.title("🤖 EXLNemoGDemoBot")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
